@@ -1,0 +1,202 @@
+{{ 'list.css' | asset_url | stylesheet_tag }}
+{% assign shop_id = shop.id %}
+{% assign shop_domain = shop.domain %}
+<div class="list_container" id="list_container">
+  {% comment %} <p>Shop ID: {{ shop_id }}</p> {% endcomment %}
+  {% comment %} <div class="list_container_item" data-url="1">
+    <img src="https://dqn.vn/wp-content/uploads/2022/07/02-07-2022-07-53-49-K9-aZ.png" alt="">
+    <div class="list_container_item_bottom" >
+      <div>
+        <div>Shopping pree</div>
+        <div>New products from our store!!</div>
+      </div>
+      <div></div>
+    </div>
+  </div> {% endcomment %}
+
+</div>
+
+
+ <script>
+let listData = [];
+
+
+
+function getUserAgent() {
+    return navigator.userAgent;
+}
+
+function getPlatform() {
+    return navigator.platform;
+}
+
+function getScreenResolution() {
+    return `${screen.width}x${screen.height}`;
+}
+
+function getTimezone() {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+function getLanguage() {
+    return navigator.language;
+}
+
+
+
+function getDeviceId() {
+    const userAgent = getUserAgent();
+    const platform = getPlatform();
+    const screenResolution = getScreenResolution();
+    const timezone = getTimezone();
+    const language = getLanguage();
+
+
+    const rawId = `${userAgent}-${platform}-${screenResolution}-${timezone}-${language}`;
+    return hashCode(rawId);
+}
+
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0; // Chuyển đổi sang 32-bit integer
+    }
+    return hash.toString(36);
+}
+var shopId = "{{ shop_id }}";
+console.log('device_id: ',getDeviceId());
+    
+    fetch('https://api.windoo.vn/api/auth/login/user-anonymous', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "device_id": getDeviceId(),
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+        console.log('Login thành công!!!!!!!!!!',response.headers.get('x-authorization'));
+        const token = response.headers.get('x-authorization');
+        sessionStorage.setItem('token', token);
+    })
+    
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+
+
+const url = `https://api.windoo.vn/api/livestream/list?shop_id=${shopId}`;
+   
+    fetch(url, {
+        method: 'GET',
+       
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+       
+        return response.json();
+    })
+    .then(data => {
+        console.log("list live: ", data);
+          listData = data.docs;
+         
+          updateLivestreamUI(listData)
+         // Handle the data from the API
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+
+
+    function updateLivestreamUI(listData) {
+    const listStreamContainer = document.getElementById("list_container");
+
+    // Kiểm tra xem phần tử với id "list_container" có tồn tại không
+    if (!listStreamContainer) {
+        console.error('Container với id "list_container" không tồn tại.');
+        return;
+    }
+
+    console.log('listData:', listData);
+
+    // Xóa nội dung cũ của container
+    listStreamContainer.innerHTML = '';
+
+    // Lặp qua mảng listData và tạo các thẻ HTML tương ứng
+    listData.forEach(data => {
+        const listItem = document.createElement("div");
+        listItem.classList.add("list_container_item");
+
+        // Định dạng nội dung của mỗi thẻ HTML dựa trên dữ liệu từ object trong mảng
+        listItem.innerHTML = `
+        <div class="list_container_item_item" data-url="${data._id}">
+    <a href="/pages/livepage?id=${data._id}">
+    <img src="https://dqn.vn/wp-content/uploads/2022/07/02-07-2022-07-53-49-K9-aZ.png" alt="">
+    </a>
+    <div class="list_container_item_bottom" >
+      <div>
+        <div>${data.title}</div>
+       
+      </div>
+     
+    </div>
+  </div>
+        `;
+
+        listStreamContainer.appendChild(listItem);
+    });
+    // const items = document.querySelectorAll('.list_container_item_item');
+    // items.forEach(function(item) {
+    //     item.addEventListener('click', function() {
+    //         var url = item.getAttribute('data-url'); // Lấy URL từ thuộc tính data-url
+    //         if (url) {
+    //             window.location.href = `/pages/livepage?id=${url}`; // Điều hướng đến trang mới
+    //         }
+    //     });
+    // });
+}
+
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Lấy tất cả các phần tử với class 'list_container_item'
+//   var items = document.querySelectorAll('.list_container_item_item');
+
+//   // Thêm sự kiện click vào từng phần tử
+//   items.forEach(function(item) {
+//     item.addEventListener('click', function() {
+//       var url = item.getAttribute('data-url'); // Lấy URL từ thuộc tính data-url
+//       if (url) {
+//         window.location.href = `/pages/livepage?id=${url}`; // Điều hướng đến trang mới
+//       }
+//     });
+//   });
+
+// });
+
+
+
+
+
+</script>
+
+{% schema %}
+  {
+    "name": "List Stream",
+    "target": "section",
+    
+    "settings": [
+      { "type": "product", "id": "product", "label": "product", "autofill": true },
+      { "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+    ]
+  }
+  
+  {% endschema %}
+  

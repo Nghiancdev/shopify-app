@@ -1,0 +1,706 @@
+{{ 'video.css' | asset_url | stylesheet_tag }}
+
+{{ 'video.js' | asset_url | script_tag }}
+{{ 'bootstrap.js' | asset_url | script_tag }}
+
+{{ 'bootstrap.css' | asset_url | stylesheet_tag }}
+{{ 'product.css' | asset_url | stylesheet_tag }}
+{{ 'flv.js' | asset_url | script_tag }}
+{% comment %} {{ 'socket.js' | asset_url | script_tag }} {% endcomment %}
+
+<div class="container">
+
+  <div class="container_items">
+    <div id="title-stream" class="container_items_title">Tiêu đề</div>
+    <div class="container_items_likes">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M5.27304 6.28033C3.22279 8.33058 3.22279 11.6547 5.27304 13.705C5.56593 13.9978 5.56593 14.4727 5.27304 14.7656C4.98015 15.0585 4.50527 15.0585 4.21238 14.7656C1.57634 12.1296 1.57634 7.85571 4.21238 5.21967C4.50527 4.92678 4.98015 4.92678 5.27304 5.21967C5.56593 5.51256 5.56593 5.98744 5.27304 6.28033ZM10.0001 9.25C9.58587 9.25 9.25008 9.58578 9.25008 10C9.25008 10.4142 9.58587 10.75 10.0001 10.75C10.4143 10.75 10.7501 10.4142 10.7501 10C10.7501 9.58578 10.4143 9.25 10.0001 9.25ZM7.75008 10C7.75008 8.75735 8.75744 7.75 10.0001 7.75C11.2427 7.75 12.2501 8.75735 12.2501 10C12.2501 11.2426 11.2427 12.25 10.0001 12.25C8.75744 12.25 7.75008 11.2426 7.75008 10ZM14.7125 13.705C16.7627 11.6547 16.7627 8.33058 14.7125 6.28033C14.4196 5.98744 14.4196 5.51256 14.7125 5.21967C15.0054 4.92678 15.4802 4.92678 15.7731 5.21967C18.4092 7.85571 18.4092 12.1296 15.7731 14.7656C15.4802 15.0585 15.0054 15.0585 14.7125 14.7656C14.4196 14.4727 14.4196 13.9978 14.7125 13.705ZM7.2908 8.0481C6.21685 9.12204 6.21685 10.8632 7.2908 11.9372C7.58369 12.2301 7.58369 12.705 7.2908 12.9978C6.9979 13.2907 6.52303 13.2907 6.23014 12.9978C4.57041 11.3381 4.57041 8.64717 6.23014 6.98744C6.52303 6.69454 6.9979 6.69454 7.2908 6.98744C7.58369 7.28033 7.58369 7.7552 7.2908 8.0481ZM12.6946 11.9372C13.7685 10.8632 13.7685 9.12204 12.6946 8.0481C12.4017 7.7552 12.4017 7.28033 12.6946 6.98744C12.9875 6.69454 13.4624 6.69454 13.7553 6.98744C15.415 8.64717 15.415 11.3381 13.7553 12.9978C13.4624 13.2907 12.9875 13.2907 12.6946 12.9978C12.4017 12.705 12.4017 12.2301 12.6946 11.9372Z" fill="#EF4D2F"/>
+      </svg>
+    <span>LIVE</span></div>
+    <div class="container_items_like">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.29865 5.31672C7.22553 4.15376 5.51555 4.15376 4.44243 5.31672C3.33386 6.5181 3.33386 8.49156 4.44243 9.69294L9.99989 15.7157L15.5573 9.69294C16.6659 8.49156 16.6659 6.5181 15.5573 5.31672C14.4842 4.15376 12.7743 4.15376 11.7011 5.31672L10.6123 6.49668C10.4546 6.66764 10.2325 6.76489 9.99989 6.76489C9.76726 6.76489 9.54521 6.66764 9.38745 6.49668L8.29865 5.31672ZM3.21756 4.18647C4.95065 2.30829 7.79043 2.30829 9.52352 4.18647L9.99989 4.70272L10.4763 4.18647C12.2093 2.30829 15.0491 2.30829 16.7822 4.18647C18.4799 6.02623 18.4799 8.98343 16.7822 10.8232L11.0206 17.0672C10.4706 17.6632 9.52914 17.6632 8.97916 17.0672L3.21756 10.8232C1.51993 8.98344 1.51993 6.02623 3.21756 4.18647Z" fill="#E3E3E3"/>
+</svg>
+
+      
+    <span id="total-like"></span></div>
+    <div class="container_items_view">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13 10C13 11.6569 11.6569 13 10 13C8.34315 13 7 11.6569 7 10C7 8.34315 8.34315 7 10 7C11.6569 7 13 8.34315 13 10ZM11.5 10C11.5 10.8284 10.8284 11.5 10 11.5C9.17157 11.5 8.5 10.8284 8.5 10C8.5 9.17157 9.17157 8.5 10 8.5C10.8284 8.5 11.5 9.17157 11.5 10Z" fill="#E3E3E3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10 4C7.52353 4 5.65153 5.22977 4.42264 6.53216C3.80748 7.18413 3.34017 7.86704 3.02329 8.45447C2.86488 8.74811 2.73973 9.02591 2.65225 9.27169C2.57143 9.49874 2.5 9.76019 2.5 10C2.5 10.2398 2.57143 10.5013 2.65225 10.7283C2.73973 10.9741 2.86488 11.2519 3.02329 11.5455C3.34017 12.133 3.80748 12.8159 4.42264 13.4678C5.65153 14.7702 7.52353 16 10 16C12.4765 16 14.3485 14.7702 15.5774 13.4678C16.1925 12.8159 16.6598 12.133 16.9767 11.5455C17.1351 11.2519 17.2603 10.9741 17.3478 10.7283C17.4286 10.5013 17.5 10.2398 17.5 10C17.5 9.76019 17.4286 9.49874 17.3478 9.27169C17.2603 9.02591 17.1351 8.74811 16.9767 8.45447C16.6598 7.86704 16.1925 7.18413 15.5774 6.53216C14.3485 5.22977 12.4765 4 10 4ZM4.00141 10.0021L4.00103 10L4.00141 9.99793C4.00509 9.97812 4.01827 9.90708 4.0654 9.77469C4.12269 9.61374 4.21422 9.40618 4.34345 9.16663C4.60183 8.68764 4.9936 8.11275 5.51365 7.56159C6.55519 6.45773 8.05819 5.5 10 5.5C11.9418 5.5 13.4448 6.45773 14.4864 7.56159C15.0064 8.11275 15.3982 8.68764 15.6566 9.16663C15.7858 9.40618 15.8773 9.61374 15.9346 9.77469C15.9817 9.90708 15.9949 9.97813 15.9986 9.99793L15.999 10L15.9986 10.0021C15.9949 10.0219 15.9817 10.0929 15.9346 10.2253C15.8773 10.3863 15.7858 10.5938 15.6566 10.8334C15.3982 11.3124 15.0064 11.8873 14.4864 12.4384C13.4448 13.5423 11.9418 14.5 10 14.5C8.05819 14.5 6.55519 13.5423 5.51365 12.4384C4.9936 11.8873 4.60183 11.3124 4.34345 10.8334C4.21422 10.5938 4.12269 10.3863 4.0654 10.2253C4.01827 10.0929 4.00509 10.0219 4.00141 10.0021Z" fill="#E3E3E3"/>
+</svg>
+
+    <span id="total-view"></span></div>
+    <video id="video_player"  autoplay muted controls class="videos"></video>
+    
+    <div id="pin" class="pin">
+      <a id="link-sp" href="">
+      <div class="info">
+       <img width="50px" height="50px" style="border-radius: 10px;" id="productImage" src="" alt="">
+      <div class="product-name">
+        <div id="name-product" style="font-size: 18;font-weight: 600; ">tên sản phẩm</div>
+        <div id="price-product" style="font-size: 14;font-weight: 450;color:#616161 ">giá</div>
+      </div>
+      </div>
+      </a>
+      <div  class="add-to-cart">
+        <button type="button" id="add-pin-product" class="btn btn-dark">Add cart</button>
+      </div>
+    </div>
+
+  <!-- Button trigger modal -->
+<button style="position: absolute;right:374px;top:53px"  id="open" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M1.66675 3.0555C1.66675 2.59526 2.03984 2.22217 2.50008 2.22217H4.29118C5.26 2.22217 6.07831 2.93473 6.21569 3.88883H16.9445C17.1766 3.88883 17.3982 3.98565 17.556 4.15596C17.7137 4.32627 17.7932 4.55465 17.7754 4.78608L17.3777 9.95652C17.2552 11.5485 15.9278 12.7777 14.3311 12.7777H7.27448L7.3776 13.6439C7.39423 13.7836 7.51272 13.8888 7.65343 13.8888H14.7223C15.1825 13.8888 15.5556 14.2619 15.5556 14.7222C15.5556 15.1824 15.1825 15.5555 14.7223 15.5555H7.65343C6.66845 15.5555 5.83906 14.819 5.72262 13.8409L4.56701 4.13378C4.55037 3.99405 4.43189 3.88883 4.29118 3.88883H2.50008C2.03984 3.88883 1.66675 3.51574 1.66675 3.0555ZM7.07607 11.1111H14.3311C15.0569 11.1111 15.6603 10.5523 15.7159 9.82869L16.0446 5.5555H6.4147L7.07607 11.1111Z" fill="white"/>
+  <path d="M10.0001 17.7777C10.0001 18.3914 9.50262 18.8888 8.88897 18.8888C8.27532 18.8888 7.77786 18.3914 7.77786 17.7777C7.77786 17.1641 8.27532 16.6666 8.88897 16.6666C9.50262 16.6666 10.0001 17.1641 10.0001 17.7777Z" fill="white"/>
+  <path d="M15.5556 17.7777C15.5556 18.3914 15.0582 18.8888 14.4445 18.8888C13.8309 18.8888 13.3334 18.3914 13.3334 17.7777C13.3334 17.1641 13.8309 16.6666 14.4445 16.6666C15.0582 16.6666 15.5556 17.1641 15.5556 17.7777Z" fill="white"/>
+  </svg>
+  <span style="font-size: 10px">Shop</span>
+</button>
+
+  </div>
+  <div class="container_item">
+    <div id="pin-dis" class="pin-dis">
+      <div id="container_item_pin_top" class="container_item_pin_top">
+        <div class="container_item_pin_top_item" id="myInput"></div>
+        <div style="cursor: pointer;" class="container_item_pin_top_item">
+          <div id="textToShow" class="hidden"  >Copied</div>
+        <svg  onclick="myFunction()"   width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.8984 5H7.22656C5.99687 5 5 5.99687 5 7.22656V15.8984C5 17.1281 5.99687 18.125 7.22656 18.125H15.8984C17.1281 18.125 18.125 17.1281 18.125 15.8984V7.22656C18.125 5.99687 17.1281 5 15.8984 5Z" stroke="#4A4A4A" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M14.9805 5L15 4.0625C14.9984 3.48285 14.7674 2.9274 14.3575 2.51753C13.9476 2.10765 13.3922 1.87665 12.8125 1.875H4.375C3.71256 1.87696 3.07781 2.14098 2.6094 2.6094C2.14098 3.07781 1.87696 3.71256 1.875 4.375V12.8125C1.87665 13.3922 2.10765 13.9476 2.51753 14.3575C2.9274 14.7674 3.48285 14.9984 4.0625 15H5" stroke="#4A4A4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+
+        </div>
+      </div>
+      <div id="container_item_pin_tag" class="container_item_pin_tag">
+        <div class="container_item_pin_tag_item">
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 20 20"
+          fill="none"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M8.57473 4.64885C9.28162 3.91477 10.2568 3.5 11.2759 3.5H13.25C15.0449 3.5 16.5 4.95507 16.5 6.75V8.93673C16.5 9.81995 16.1405 10.6651 15.5043 11.2778L10.7572 15.8491C9.77593 16.794 8.21868 16.7793 7.25537 15.816L4.35746 12.9181C3.29782 11.8585 3.28166 10.1455 4.32112 9.06605L8.57473 4.64885ZM13 8C13.5523 8 14 7.55228 14 7C14 6.44772 13.5523 6 13 6C12.4477 6 12 6.44772 12 7C12 7.55228 12.4477 8 13 8Z"
+            fill="#998A00"
+          />
+        </svg>
+        <div>Discount </div>
+        <div id="discount"></div>
+        <div> %</div>
+        </div>
+      </div>
+    </div>
+    <div id="container_item_chatbox" class="container_item_chatbox">
+
+      <div id="livestreamContainer">
+
+      </div>
+    </div>
+    <div class="container_item_chatinput">
+      <input style="     height: 10px;   margin-top: 10px;margin-right: 4px;border-width: 0px;border-radius: 10px; border-color:white" type="text" id="inputField" placeholder="Nhập và nhấn Enter">
+      <svg id="like" style="cursor: pointer;" width="50" height="50" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.29865 5.31666C7.22553 4.1537 5.51555 4.1537 4.44243 5.31666C3.33386 6.51804 3.33386 8.4915 4.44243 9.69288L9.99989 15.7156L15.5573 9.69288C16.6659 8.4915 16.6659 6.51804 15.5573 5.31666C14.4842 4.1537 12.7743 4.1537 11.7011 5.31666L10.6123 6.49662C10.4546 6.66758 10.2325 6.76482 9.99989 6.76482C9.76726 6.76482 9.54521 6.66758 9.38745 6.49662L8.29865 5.31666ZM3.21756 4.18641C4.95065 2.30823 7.79043 2.30823 9.52352 4.18641L9.99989 4.70266L10.4763 4.18641C12.2093 2.30823 15.0491 2.30823 16.7822 4.18641C18.4799 6.02617 18.4799 8.98337 16.7822 10.8231L11.0206 17.0671C10.4706 17.6631 9.52914 17.6631 8.97916 17.0671L3.21756 10.8231C1.51993 8.98337 1.51993 6.02617 3.21756 4.18641Z" fill="#4A4A4A"/>
+</svg>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Sản phẩm trong live</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <div  class="modal-body-items">
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      
+      <strong class="me-auto">Message</strong>
+   
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Added product to cart successfully
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Stream View",
+"target": "section",
+"settings": [
+{ "type": "product", "id": "product", "label": "product", "autofill": true },
+{ "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+]
+}
+
+{% endschema %}
+
+<script>
+
+function myFunction() {
+  const textToShow = document.getElementById('textToShow');
+  textToShow.classList.remove('hidden');
+  textToShow.classList.add('copy');
+    setTimeout(function() {
+        textToShow.classList.remove('copy');
+        textToShow.classList.add('hidden');
+    }, 1000);
+            // Lấy phần tử có id là myInput
+            var copyText = document.getElementById("myInput").innerText;
+
+            // Tạo một textarea ẩn để copy text
+            var textarea = document.createElement("textarea");
+            textarea.value = copyText;
+            document.body.appendChild(textarea);
+
+            // Chọn và copy nội dung của textarea
+            textarea.select();
+            document.execCommand("copy");
+
+            // Xóa textarea khỏi DOM
+            document.body.removeChild(textarea);
+
+            // Thông báo copy thành công
+            
+        }
+
+// function outFunc() {
+//   var tooltip = document.getElementById("myTooltip");
+//   tooltip.innerHTML = "Copy to clipboard";
+// }
+
+
+
+  // const streamKey = "66471233b16c50c6736cd18c" ;
+  // Lấy URL hiện tại
+  let streamKey = '';
+  var currentURL = window.location.href;
+
+  // Tách query string từ URL
+  var queryString = currentURL.split('?')[1];
+
+  // Phân tích query string để lấy giá trị của tham số 'id'
+  var urlParams = new URLSearchParams(queryString);
+  var Key = urlParams.get('id');
+  streamKey = Key;
+  // In giá trị của tham số 'id'
+  const tokens = sessionStorage.getItem('token');
+
+  fetch(`https://api.windoo.vn/api/livestream/detail/${streamKey}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${tokens}`
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("detail stream: ", data);
+    var flvPlayer = null;
+    document.getElementById("total-view").innerText = data.docs.view_number;
+    document.getElementById("total-like").innerText = data.docs.like_number;
+    document.getElementById("title-stream").innerText = data.docs.title;
+// $('#video_player').show();
+        flvPlayer = mpegts.createPlayer({type: 'flv', url: data.docs.livestream_data.flv_url, isLive: true, enableStashBuffer: false});
+        flvPlayer.attachMediaElement(document.getElementById('video_player'));
+        flvPlayer.load();
+        flvPlayer.play();
+    
+})
+.catch(error => {
+    console.error('Lỗi:', error);
+});
+
+
+
+
+  fetch(`https://api.windoo.vn/api/discount/pin/${streamKey}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${tokens}`
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("pin discount: ", data.docs);
+    listData = data.docs.title;
+    listData1 = data.docs.value;
+    const myDiv = document.getElementById('myInput');
+    const myDis = document.getElementById('discount');
+    const myDisDiv = document.getElementById('container_item_pin_top');
+    const myDisDiv2 = document.getElementById('container_item_pin_tag');
+    const disToShow = document.getElementById('pin-dis');
+
+  if(data.docs.title){
+    disToShow.classList.remove('pin-dis');
+  disToShow.classList.add('container_item_pin');
+    myDiv.textContent = listData;
+  myDis.textContent = listData1;
+  }
+  
+
+   // Chèn giá trị của field vào div
+          
+          
+    
+})
+.catch(error => {
+    console.error('Lỗi:', error);
+});
+fetch(`https://api.windoo.vn/api/product/pin/${streamKey}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${tokens}`
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("pin product: ", data.docs);
+    const pinToShow = document.getElementById('pin');
+ 
+  
+  if(data.docs?.title){
+    pinToShow.classList.remove('pin');
+    pinToShow.classList.add('pin-product');
+    const nameProduct = document.getElementById('name-product');
+   const priceProduct = document.getElementById('price-product');
+   const imgElement = document.getElementById('productImage');
+    const linkSP = document.getElementById('link-sp');
+   imgElement.src = data.docs?.pin_product?.image;
+   linkSP.href = `/products/${data.docs?.handle}`;
+    imgElement.src = data.docs?.image;
+   nameProduct.textContent = data.docs?.title;
+   priceProduct.textContent = data.docs?.price;
+  }
+
+
+    
+   // Chèn giá trị của field vào div
+          
+          
+    
+})
+.catch(error => {
+    console.error('Lỗi:', error);
+});
+
+fetch('https://api.windoo.vn/api/livestream/view', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${tokens}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "livestream_id": streamKey,
+        "view_number": "1",
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+        console.log('cộng view done');
+      })
+      .catch(error => {
+        console.error('Lỗi:', error);
+      });
+
+
+
+
+
+
+
+
+document.getElementById('open').addEventListener('click', function() {
+    fetch(`https://api.windoo.vn/api/product/${streamKey}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${tokens}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("list product: ", data);
+        listData = data.docs;
+        // Xử lý dữ liệu từ API
+        updateProductUI(listData);
+    })
+    .catch(error => {
+        console.error('Lỗi:', error);
+    });
+});
+
+document.getElementById('like').addEventListener('click', function() {
+  fetch('https://api.windoo.vn/api/livestream/like', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${tokens}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "livestream_id": streamKey,
+        "react_type": 'wow'
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+        console.log('like thành công');
+      })
+      .catch(error => {
+        console.error('Lỗi:', error);
+      });
+});
+
+  
+
+function updateProductUI(listData) {
+    const listStreamContainer = document.getElementById("modal-body");
+
+    // Kiểm tra xem phần tử với id "list_container" có tồn tại không
+    if (!listStreamContainer) {
+        console.error('Container với id "list_container" không tồn tại.');
+        return;
+    }
+
+    console.log('listData:', listData);
+
+    // Xóa nội dung cũ của container
+    listStreamContainer.innerHTML = '';
+
+    // Lặp qua mảng listData và tạo các thẻ HTML tương ứng
+    listData.forEach(data => {
+        const listItem = document.createElement("div");
+        listItem.classList.add("modal-body-items");
+
+        // Định dạng nội dung của mỗi thẻ HTML dựa trên dữ liệu từ object trong mảng
+        listItem.innerHTML = `
+          <div  class="modal-body-item" >
+         
+          <div class="modal-body-item-checkbox">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+
+          </div>
+          <div class="modal-body-item-checkbox">
+            <img
+              src=${data.image}
+              width="44px" height="44px" style="border-radius: 10px;" alt="" />
+          </div>
+          <div class="modal-body-item-checkbox">${data.title}</div>
+          <div class="modal-body-item-checkbox-button" value="${data.product_id}">
+              <button type="button" id="liveToastBtn" class="btn btn-dark">Add cart</button>
+            </div>
+          </div>
+           
+          </div>
+        `;
+
+        listStreamContainer.appendChild(listItem);
+    });
+    const items = document.querySelectorAll('.modal-body-item-checkbox-button');
+    const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+
+    items.forEach(function(item) {
+        item.addEventListener('click', function() {
+            var value = item.getAttribute('value'); // Lấy URL từ thuộc tính data-url
+            var numberValue = parseInt(value);
+            
+            console.log("Giá trị số là:", numberValue);
+            let formData = {
+ 'items': [{
+  'id':numberValue,
+  'quantity': 1,
+  'properties': {
+      'windoo_live': streamKey
+    }
+  }]
+  };
+fetch(window.Shopify.routes.root + 'cart/add.js', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+})
+.then(response => {
+  return response.json();
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+        });
+    });
+}
+</script>
+
+<script>
+  var flvPlayer;
+  function goLoad() {
+    console.log("load click!");
+    console.log("mse live support:" + flvjs.getFeatureList().mseLiveFlvPlayback);
+    if (flvjs.isSupported()) {
+      var videoElement = document.getElementById('videoElement');
+      console.log("videoElement:" + videoElement);
+      flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        isLive: true,
+        url: `https://livestream.windoo.vn/live/${streamKey}.flv`,
+        duration: 0,
+        filesize: 0,
+        enableStashBuffer: false,
+        hasAudio: true,
+        hasVideo: true
+      });
+      flvPlayer.attachMediaElement(videoElement);
+      flvPlayer.load();
+
+
+    }
+  }
+
+
+  function goPlay() {
+    console.log("play button press")
+    flvPlayer.play();
+  }
+
+</script>
+<script>
+  // var player = videojs('my-video');
+  var player1 = videojs('me-video');
+  const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+  $(document).ready(function () {
+    $('.top-layer').prependTo('body');
+  });
+</script>
+<script src="{{ 'video.js' | asset_url }}" defer="defer"></script>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+  integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+<script>
+  const host = "https://socket.api.windoo.vn/socket";
+  let livestreamData = [];
+
+  fetch(`https://api.windoo.vn/api/livestream/list-comment/${streamKey}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${tokens}`
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log("list comment: ", data);
+    livestreamData = data.docs
+    console.log("🚀 ~ livestreamData:", livestreamData)
+    addComent(livestreamData)
+})
+.catch(error => {
+    console.error('Lỗi:', error);
+});
+
+function addComent(data){
+ livestreamData = data;
+ updateLivestreamUIS();
+}
+
+
+
+
+  const socket = io(host, {
+    extraHeaders: {
+      "x-authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc0NTE0OTIsImRhdGEiOnsiX2lkIjoiNjY0NDcyNzNkOGYzODQ1ZTIyMzFmYzgxIiwia2V5IjoiMDg0ZWE0NWVhYmRlMWE0ZTJiMmY1OTk5MzM0NTc1NzIiLCJzaWduYXR1cmUiOiI4ZTdhOTkwZmYwOWM5MGUxYjEwZjI2YTQ1N2UxM2IzOCIsInNlc3Npb24iOiI2NjQ2Y2FlNGIxNmM1MGM2NzM2Y2JlNGMifSwiaWF0IjoxNzE1OTE1NDkyfQ.giqLuxunrLHbqbFgSpP01BCTJ9CLZP9zulpblIdglO8",
+    },
+  });
+  socket.on("connect", () => {
+    const roomId = `livestream_${streamKey}`; // Thay roomId bằng roomId bạn nhận được từ server
+    
+
+    // socket.emit("joinRoom", roomId);
+    setTimeout(() => {
+      socket.emit("joinRoom", roomId);
+    }, 500);
+
+    // joinRoom(roomId);
+    console.log("Connected to server");
+  });
+
+  socket.on("livestreamToClient", (datas) => {
+    // setData1(datas);
+    
+    livestreamData.push(JSON.parse(datas));
+    // livestreamData.unshift(JSON.parse(datas));
+    setTimeout(function() {
+      scrollChatToBottom();
+}, 400);
+   
+    updateLivestreamUIS();
+    // setLivestreamData((prevData) => [...prevData, datas]);
+  });
+
+      socket.on("emojiToClient", (datass) => {
+            
+            const data = JSON.parse(datass)
+            
+            document.getElementById("total-like").innerText = data.livestream_id.like_number;
+          });
+       socket.on("viewToClient", (datasss) => {
+          
+            const dataView = JSON.parse(datasss)
+            document.getElementById("total-view").innerText = dataView.livestream_id.view_number;
+          });
+
+          function scrollChatToBottom() {
+    var chatContainer = document.getElementById('container_item_chatbox');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+   
+}
+socket.on("livestreamProductToClient", (data) => {
+   console.log("🚀pinnnnnnnnnnn:", data)
+   const datas = JSON.parse(data)
+   const nameProduct = document.getElementById('name-product');
+   const priceProduct = document.getElementById('price-product');
+   const myDiv = document.getElementById('myInput');
+    const myDis = document.getElementById('discount');
+    const imgElement = document.getElementById('productImage');
+    const linkSP = document.getElementById('link-sp');
+    linkSP.href = `/products/${datas?.pin_product?.handle}`;
+imgElement.src = datas?.pin_product?.image;
+    myDiv.textContent = datas?.pin_discount?.title;
+    myDis.textContent = datas?.pin_discount?.value;
+   nameProduct.textContent = datas?.pin_product?.title;
+   priceProduct.textContent = datas?.pin_product?.price;
+  });
+  function updateLivestreamUIS() {
+
+    const livestreamContainer = document.getElementById("livestreamContainer");
+ 
+    // Xóa nội dung cũ của container
+    livestreamContainer.innerHTML = "";
+
+    // Lặp qua mảng livestreamData và tạo các thẻ HTML tương ứng
+    livestreamData.forEach(data => {
+      const listItem = document.createElement("div");
+      listItem.classList.add("livestreamItem");
+
+      // Định dạng nội dung của mỗi thẻ HTML dựa trên dữ liệu từ object trong mảng
+      listItem.innerHTML = `
+                
+                <div  class="container_item_chatbox_item">
+                <div class="container_item_chatbox_item_avatar">
+                  <img class="image" src="${data.createBy.user_avatar}" alt="" >
+                </div>
+    <div class="container_item_chatbox_item_content">
+      <div class="container_item_chatbox_item_content_name">
+        ${data.createBy.user_name}
+      </div>
+      <div class="container_item_chatbox_item_content_chat">
+        ${data.chat_content}
+      </div>
+    </div>
+    </div>
+                `;
+
+      livestreamContainer.appendChild(listItem);
+    });
+  }
+
+</script>
+<script>
+  // Lấy tham chiếu đến ô input
+  var inputField = document.getElementById("inputField");
+
+  // Gắn sự kiện cho việc nhấn phím
+  inputField.addEventListener("keyup", function (event) {
+    // Kiểm tra xem phím nhấn là Enter hay không (mã phím 13 là mã của phím Enter)
+    if (event.keyCode === 13) {
+      // Gửi dữ liệu
+      postData(inputField.value);
+      // Xóa dữ liệu cũ
+      inputField.value = "";
+    }
+  });
+
+  // Hàm gửi dữ liệu (đây chỉ là hàm giả định)
+  function postData(comment) {
+    const url = 'https://api.windoo.vn/api/livestream/comment';
+    const token = sessionStorage.getItem('token');
+    console.log("🚀 ~ postData ~ token:", token)
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "livestream_id": streamKey,
+        "chat_content": comment
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Có lỗi xảy ra khi gửi dữ liệu');
+        }
+        console.log('Dữ liệu đã được gửi thành công');
+      })
+      .catch(error => {
+        console.error('Lỗi:', error);
+      });
+  }
+</script>

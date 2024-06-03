@@ -1,0 +1,16 @@
+.modal-body{
+    
+}
+.modal-body-item{
+    border-bottom: 1px solid #EBEBEB; 
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+.modal-body-item-checkbox{
+     
+    margin-left: 10px;
+}
+.modal-body-item-checkbox-button{
+    margin-left: 180px;
+}

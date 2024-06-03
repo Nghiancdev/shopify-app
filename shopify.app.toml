@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "cb54d714598af9a22b00febca8b78e8a"
+name = "Live stream solution by Windoo"
+handle = "livestream-4"
+application_url = "https://dramatically-playing-signals-issue.trycloudflare.com"
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "livetream.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_cart_transforms,read_checkouts,read_discounts,read_orders,read_price_rules,read_products,write_cart_transforms,write_checkouts,write_discounts,write_orders,write_price_rules,write_products"
+
+[auth]
+redirect_urls = [
+  "https://dramatically-playing-signals-issue.trycloudflare.com/auth/callback",
+  "https://dramatically-playing-signals-issue.trycloudflare.com/auth/shopify/callback",
+  "https://dramatically-playing-signals-issue.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false
